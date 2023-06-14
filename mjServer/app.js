@@ -1,15 +1,14 @@
-const ws = require('nodejs-websocket')
-console.log('开始监听客户端消息');
-let webSocket  = ws.createServer((client)=>{
-    client.on('text',(data)=>{
-        console.log('客户端发来了消息-->>',data);
-    })
-    client.on('close',()=>{
-        console.log('网络连接以断开');
-    })
-    client.on('error',()=>{
-        console.log('网络连接出错');
-    })
+let MessageMgr = require('./messageMgr')
+let DB = require('./db');
+
+
+let db = new DB();
+let messageMgr = new MessageMgr();
+db.getUserInfo().then((result) => {
+    console.log('数据库巡查数据成功返回的结果是--》》', result);
+}).catch((err) => {
+    console.log('数据库查询失败 错误原因--》》', err)
 })
 
-webSocket.listen(3001);
+messageMgr.createServer();
+
