@@ -285,6 +285,12 @@
     "loginPrefab": {
       "__uuid__": "ddd092ae-4750-4cef-8e34-d1556d8af455"
     },
+    "hallPrefab": {
+      "__uuid__": "01a681da-3467-4f4a-935b-63e2075af01b"
+    },
+    "gameNode": {
+      "__uuid__": "1b83ba17-7e18-473b-8b3b-b666acd1f97e"
+    },
     "_id": "02IqYUrctN9LzpK10Tw+OP"
   }
 ]
