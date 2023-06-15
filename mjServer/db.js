@@ -22,7 +22,7 @@ class Db {
     }
     getUserInfo(id){
         return new Promise((resolve,reject)=>{
-            this._mysql.query('select * from b_users where user_id = ' + id,(err,result)=>{
+            this._mysql.query('select * from user_info',(err,result)=>{
                 if(err){
                     reject(err);
                 }else{
