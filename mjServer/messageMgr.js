@@ -37,7 +37,7 @@ class MessageMgr {
         console.log('发来的数据是--->>>',data);
         switch (type) {
             case'login':
-                global.instance.userMgr.responseUserLoginMessage(data).then((result)=>{
+                global.instance.userMgr.responseUserLoginMessage(data,client).then((result)=>{
                     console.log('登陆返回的是信息是',result);
                     this.sendMessage(type,result,client)
                 }).catch((err)=>{

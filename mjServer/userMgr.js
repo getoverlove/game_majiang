@@ -12,7 +12,7 @@ class UserMgr {
     constructor() {
         this._userList = [];
     }
-    responseUserLoginMessage(id){
+    responseUserLoginMessage(id,client){
         return new Promise((resolve, reject) => {
             for (let i = 0; i < this._userList.length ; i++) {
                 let player = this._userList[i];
@@ -26,7 +26,7 @@ class UserMgr {
                     let id = result[0].user_id;
                     let nickName = result[0].user_name;
                     let houseCardCount = result[0].user_house_card_count;
-                    let player = new user(id,nickName,houseCardCount);
+                    let player = new user(id,nickName,houseCardCount,client);
                     this._userList.push(player);
                     resolve(player.getPlayerInfo());
                 }else{
