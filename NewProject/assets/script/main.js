@@ -1,38 +1,45 @@
+import globalMgr from './common/golbleMgr'
+
 cc.Class({
     extends: cc.Component,
 
     properties: {
         loginPrefab: cc.Prefab,
-
+        hallPrefab:cc.Prefab,
+        gameNode:cc.Prefab,
     },
 
 
 
     onLoad() {
-        let loginNode = cc.instantiate(this.loginPrefab);
-        this.node.addChild(loginNode);
-        
-        var ws = new WebSocket("ws://127.0.0.1:3001");
+        this.node.on('进入大厅界面',()=>{
+            this.inistaceNode(this.hallPrefab);
+        })
+        this.node.on('进入游戏界面',()=>{
+            this.inistaceNode(this.gameNode);
+        })
 
-        ws.onopen = function (evt) {
-            console.log("与服务端连接成功");
-            ws.send("Hello WebSockets!");
-        };
-
-        ws.onmessage = function (data) {
-            console.log("服务端发来了消息: " + data);
-            ws.close();
-        };
-
-        ws.onclose = function (){
-            console.log("与服务端断开连接");
-        };
-
+        this.inistaceNode(this.loginPrefab);
+        globalMgr.messageMgr.connectServer().then(()=>{
+            console.log('网络连接成功');
+            
+        }).catch(()=>{
+            console.log('网络连接失败');
+        })
+        globalMgr.mainScene = this.node;
+    },
+    inistaceNode(prefab){
+        if(this.currentNode){
+            this.currentNode.destroy();
+        }
+        let node = cc.instantiate(prefab);
+        this.currentNode = node;
+        this.node.addChild(node);
     },
 
     start() {
 
     },
 
-    update(dt) { },
+    // update(dt) { },
 });
