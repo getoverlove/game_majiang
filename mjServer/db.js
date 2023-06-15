@@ -5,7 +5,7 @@ class Db {
         let Mysql = mysql.createConnection({
             host     : '127.0.0.1',
             user     : 'root',
-            password : '123456',
+            password : 'ax109304*',
             database : 'b_majiang'
         })
         Mysql.connect();
@@ -14,7 +14,7 @@ class Db {
     }
     getUserInfo(){
         return new Promise((resolve,reject)=>{
-            this._mysql.query('select * from user_info',(err,result)=>{
+            this._mysql.query('select * from b_users',(err,result)=>{
                 if(err){
                     reject(err);
                 }else{
