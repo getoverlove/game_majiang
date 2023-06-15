@@ -1,6 +1,14 @@
 let mysql = require('mysql');
 
 class Db {
+    static getInstance(){
+        if(Db.instance){
+            return Db.instance;
+        }else {
+            Db.instance = new Db();
+            return Db.instance;
+        }
+    }
     constructor() {
         let Mysql = mysql.createConnection({
             host     : '127.0.0.1',
@@ -12,9 +20,9 @@ class Db {
         console.log('数据库连接成功');
         this._mysql = Mysql;
     }
-    getUserInfo(){
+    getUserInfo(id){
         return new Promise((resolve,reject)=>{
-            this._mysql.query('select * from user_info',(err,result)=>{
+            this._mysql.query('select * from user_info where user_id = ' + id,(err,result)=>{
                 if(err){
                     reject(err);
                 }else{
@@ -24,5 +32,5 @@ class Db {
         })
     }
 }
-
+global.instance.db = Db.getInstance();
 module.exports = Db;
